@@ -1,16 +1,16 @@
 # ICT Workers' Individual Issues — Country Cluster Analysis
 
-A data analytics and unsupervised machine learning project exploring patterns in individual workplace issues among ICT workers across 37 countries using statistical analysis, clustering algorithms, and data visualization.
+An exploratory data analysis and unsupervised machine learning project investigating patterns in individual workplace issues among ICT workers across 37 countries using statistical analysis, clustering algorithms, and data visualization.
 
 ## Overview
 
-This project investigates whether countries exhibit similar patterns in workplace-related issues experienced by ICT workers. It analyzes two sets of country-level scores (FS and S) across nine workplace attributes to identify similarities, differences, and potential country groupings.
+This project explores whether countries exhibit similar patterns in workplace-related issues experienced by ICT workers. It analyzes two sets of country-level scores (FS and S) across nine workplace attributes to identify similarities, differences, and potential country groupings.
 
-The objective is not just to group countries, but also to evaluate whether meaningful cluster structures exist, compare clustering approaches, assess the stability of the results, and understand the differences between the two score sets.
+The objective is to identify meaningful patterns in the data, compare clustering approaches, assess the stability of clustering solutions, and understand the differences between the two score sets.
 
 ## Dataset
 
-The dataset contains observations from **37 countries**, with the following nine attributes:
+The dataset contains observations from **37 countries**, with nine workplace-related attributes:
 
 | Code | Attribute |
 |---|---|
@@ -32,34 +32,37 @@ The dataset also includes the number of respondents per country.
 
 ## Project Workflow
 
+The project is organized into three main stages, executed sequentially.
+
 ### 1. Data Preprocessing
 
 - Loaded and examined the original ICT dataset.
 - Processed country-level measurements and prepared the FS and S score sets.
-- Examined missing values, distributions, and descriptive statistics.
+- Examined missing values and descriptive statistics.
 - Performed univariate and multivariate outlier analysis.
 - Used Mahalanobis distance to identify potentially unusual country-level observations.
-- Standardized the datasets to make the attributes comparable.
+- Standardized the datasets to make attributes comparable.
 
-### 2. Exploratory Data Analysis
+### 2. Data Visualization and Exploratory Data Analysis
 
-Conducted statistical exploration to understand the distribution and relationships between workplace attributes.
+Conducted exploratory analysis to understand the distributions, relationships, and patterns within the workplace attributes.
 
 - Analyzed distributions of all nine attributes.
 - Generated descriptive statistics.
-- Examined correlations between attributes.
+- Examined correlations between workplace attributes.
 - Compared FS and S score distributions.
-- Identified countries with substantial differences between the two score sets.
+- Identified countries with notable differences between the two score sets.
+- Generated statistical plots and correlation heatmaps.
 
-### 3. Clustering Analysis
+### 3. Clustering and Analysis
 
-Applied unsupervised learning techniques to identify groups of countries with similar workplace issue profiles.
+Applied unsupervised machine learning techniques to identify groups of countries with similar workplace issue profiles.
 
-**Algorithms used:**
+**Clustering algorithms:**
 - K-Means Clustering
 - Hierarchical Agglomerative Clustering
 
-**Techniques and evaluation metrics:**
+**Evaluation and validation techniques:**
 - Hopkins Statistic — assessed clustering tendency.
 - Elbow Method — examined within-cluster sum of squares.
 - Silhouette Score — evaluated cluster separation.
@@ -69,42 +72,23 @@ Applied unsupervised learning techniques to identify groups of countries with si
 - Adjusted Rand Index (ARI) — measured agreement between clustering solutions.
 - Cophenetic Correlation — evaluated hierarchical clustering representations.
 
-The number of clusters was evaluated across multiple values of k, followed by comparisons between clustering algorithms and between FS and S datasets.
-
-### 4. Cluster Validation and Robustness
-
-To avoid relying solely on clustering scores:
-
-- Compared observed silhouette scores against simulated datasets with no underlying cluster structure.
-- Evaluated cluster stability using repeated subsampling.
+**Robustness analysis:**
+- Compared clustering solutions across different values of k.
 - Compared K-Means and hierarchical clustering results.
-- Examined agreement between FS and S cluster assignments.
-- Evaluated individual country assignments using silhouette scores.
-- Investigated how sensitive the clustering solutions were to different clustering configurations.
-
-### 5. Data Visualization
-
-Created visualizations to interpret the statistical and clustering results, including:
-
-- Attribute distribution plots.
-- Correlation heatmaps.
-- Cluster evaluation plots.
-- Elbow and silhouette analysis.
-- Hierarchical clustering dendrograms.
-- Country-level cluster visualizations.
-- FS versus S comparison plots.
-
-Visual outputs and exported analysis files are available in the `visuals/` directory.
+- Evaluated cluster stability using repeated subsampling.
+- Compared FS and S cluster assignments.
+- Examined individual country assignments using silhouette scores.
+- Compared observed clustering results against simulated datasets without underlying cluster structure.
 
 ## Key Findings
 
 - The analysis identified a potential three-cluster structure across the countries.
 - A two-cluster solution was more reproducible, while the three-cluster solution provided a finer grouping.
 - The three-cluster solution showed some evidence of structure beyond what would be expected from simulated structureless data.
-- The overall clustering evidence was relatively weak, highlighting the importance of validating unsupervised learning results rather than relying on a single metric.
+- Overall clustering evidence was relatively weak, highlighting the importance of validating unsupervised learning results rather than relying on a single metric.
 - FS and S exhibited strong correlations across all nine workplace attributes, although certain countries showed notable differences between their standardized scores.
 
-These findings demonstrate the importance of combining clustering algorithms with statistical validation and robustness analysis when interpreting country-level data.
+These findings emphasize the importance of combining clustering algorithms with statistical validation and robustness analysis when interpreting country-level data.
 
 ## Tech Stack
 
@@ -136,11 +120,13 @@ mp3-Country-Cluster-Analysis/
 ├── preprocessing.ipynb
 │   └── Data cleaning, preprocessing and outlier analysis
 │
-├── clustering.ipynb
-│   └── K-Means, hierarchical clustering and validation
+├── visualization.ipynb
+│   └── Exploratory data analysis and visualizations
 │
-└── visualization.ipynb
-    └── Statistical comparisons and data visualizations
+├── clustering.ipynb
+│   └── Clustering algorithms, evaluation and validation
+│
+└── README.md
 ```
 
 ## Getting Started
@@ -164,20 +150,20 @@ git clone https://github.com/navya2006/mp3-Country-Cluster-Analysis.git
 cd mp3-Country-Cluster-Analysis
 ```
 
-3. Create and activate a virtual environment (recommended):
+3. Create a virtual environment:
 
 ```bash
 python -m venv venv
 ```
 
-On macOS/Linux:
+Activate it:
 
+**macOS/Linux**
 ```bash
 source venv/bin/activate
 ```
 
-On Windows:
-
+**Windows**
 ```bash
 venv\Scripts\activate
 ```
@@ -185,7 +171,7 @@ venv\Scripts\activate
 4. Install the required libraries:
 
 ```bash
-pip install pandas numpy matplotlib seaborn scipy scikit-learn jupyter
+pip install pandas numpy matplotlib seaborn scipy scikit-learn jupyter openpyxl
 ```
 
 5. Launch Jupyter Notebook:
@@ -196,11 +182,19 @@ jupyter notebook
 
 ### Running the Notebooks
 
-Run the notebooks in the following order:
+Execute the notebooks in the following order:
 
-1. `preprocessing.ipynb` — prepares and processes the original dataset.
-2. `clustering.ipynb` — performs clustering, evaluation, and validation.
-3. `visualization.ipynb` — generates statistical comparisons and visual outputs.
+**1. `preprocessing.ipynb`**
+
+Cleans the original dataset, processes country-level scores, performs missing-value and outlier analysis, and prepares the data for further analysis.
+
+**2. `visualization.ipynb`**
+
+Performs exploratory data analysis (EDA), examines attribute distributions and correlations, compares FS and S measurements, and generates visualizations to understand patterns in the dataset.
+
+**3. `clustering.ipynb`**
+
+Applies K-Means and Hierarchical Clustering, evaluates optimal cluster configurations, performs cluster validation and stability analysis, and interprets the resulting country groups.
 
 Ensure the notebooks are executed from the repository's root directory so that relative file paths resolve correctly.
 
